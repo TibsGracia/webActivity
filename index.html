@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Web3</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- <link rel="stylesheet" href="/css/mystyle.css"> -->
+
+</head>
+<style>
+    body {
+        background-color: #000;
+    }
+
+    html,
+    body {
+        height: 100%;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .imagebg {
+        /* background-image: url("http://www.webdesignhot.com/wp-content/uploads/2016/11/Wonderful-Christmas-Background-Design-Illustration.jpg"); */
+        background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT3ScVTjN0sf_-lloOkxLTUy9V9kWKIiRet0HgLaa4PvE8B8M2R");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        background-attachment: fixed;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        -webkit-filter: blur(3px);
+        filter: blur(3px);
+        opacity: 0.6;
+        filter: alpha(opacity=60);
+    }
+
+    .form-container {
+        width: 50%;
+        margin: auto;
+        border-radius: 25px;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        padding: 30px;
+        background-color: #fff;
+        position: relative;
+        box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 20px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);
+    }
+
+    h3,
+    h1,
+    h2 {
+        text-align: center;
+    }
+
+    h1 {
+        color: white;
+    }
+
+    h3 {
+        font-family: cursive
+    }
+
+    label {
+        font-size: 20px
+    }
+
+    h1 {
+        background-color: rgba(45, 213, 255, 0.671);
+        padding: 10px;
+        font-family: fantasy;
+        position: relative;
+        margin-top: 20px;
+    }
+
+    input,
+    textarea,
+    button {
+        width: 100%;
+    }
+</style>
+
+<body>
+    <div class="imagebg"></div>
+    <h1>SUBJECT ENROLLMENT</h1>
+    <div class="form-container">
+        <h3>Enrollment Form</h3>
+        <form method="post">
+            <label for="subject">Subject:</label>
+            <input id="subject" type="text" name="subject" placeholder="Your subject" required>
+            <label for="name">Name:</label>
+            <input id="name" type="email" name="name" placeholder="Your name" required>
+            <label for="email">Email:</label>
+            <input id="email" type="text" name="email" placeholder="Your email address" required>
+            <label for="course">Course & Year:</label>
+            <input id="course" type="text" name="course" placeholder="Your course" required>
+            <button type="button" class="button-primary" name="btnCon" id="btnConnect">Create</button>
+        </form>
+    </div>
+</body>
+<!-- <script src="createFile.js"></script> -->
+<script>
+    $(document).ready(function () {
+        $('#btnConnect').click(function (event) {
+            $.ajax({
+                url: 'http://127.0.0.1:8080',
+                crossDomain: 'true',
+                type: "POST",
+                data: JSON.stringify({
+                    subject: $('#subject').val(),
+                    name: $('#name').val(),
+                    email: $('#email').val(),
+                    course: $('#course').val(),
+                }),
+                success: function (data) {
+                    console.log(data)
+                },
+                error: function (err) {
+                    console.log(err)
+                }
+            });
+            Swal.fire({
+                type: 'success',
+                title: $('#name').val() + ' has been enrolled',
+                showConfirmButton: false,
+                timer: 1500
+            })
+
+        });
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
+</html>
